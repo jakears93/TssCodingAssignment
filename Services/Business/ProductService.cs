@@ -16,9 +16,19 @@ namespace TssCodingAssignment.Services.Business
             return daoService.PopulateList();
         }
 
-        public ProductModel GetProduct(int id)
+        public ProductModel GetProductById(int id)
         {
-            return daoService.GetProduct(id);
+            return daoService.GetProductById(id);
+        }
+
+        public ProductModel GetProductByName(string name)
+        {
+            return daoService.GetProductByName(name);
+        }
+
+        public Boolean AddProduct(ProductModel product)
+        {
+            return daoService.AddProduct(product);
         }
     }
 }

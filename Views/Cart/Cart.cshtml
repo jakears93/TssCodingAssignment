@@ -6,9 +6,6 @@
 
 <h2>Cart</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -26,33 +23,44 @@
         <th></th>
     </tr>
 
-    var totalCost = 0;
 
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.quantity)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.product.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.product.Cost)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.extendedCost)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>
-</tr>
 
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.extendedCost)
+                </td>
+                <td>
+                    @{Html.BeginForm("Remove", "Cart", FormMethod.Post);}
+                    @Html.Hidden("Id", @item.product.Id.ToString())
+                    <div class="text-center"><input type="submit" class="add-btn btn btn-outline-dark mt-auto" value="Remove Item"></div>
+                    @{Html.EndForm();}
+                </td>
+            </tr>
+        }
     }
 
 </table>
+<br />
+<br />
+<tr class="fw-bold fs-4">
+    <td>
+        <h3>Total Cost: </h3>
+    </td>
+    <td class="fw-bold fs-4">
+        <h3>$@Model.Sum(x => x.extendedCost)</h3>
+    </td>
+</tr>
 
-<h1>Total</h1>
 

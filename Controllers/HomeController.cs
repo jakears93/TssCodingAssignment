@@ -51,7 +51,7 @@ namespace TssCodingAssignment.Controllers
             }
 
             ProductService productService = new ProductService();
-            productModel = productService.GetProduct(idValue);
+            productModel = productService.GetProductById(idValue);
 
             CartItemModel item = new CartItemModel { product = productModel, quantity = 1 , extendedCost = productModel.Cost};
             if (Session["cart"] == null)
