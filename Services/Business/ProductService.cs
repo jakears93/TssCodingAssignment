@@ -26,7 +26,7 @@ namespace TssCodingAssignment.Services.Business
             return daoService.GetProductByName(name);
         }
 
-        public Boolean AddProduct(ProductModel product)
+        public int AddProduct(ProductModel product)
         {
             return daoService.AddProduct(product);
         }

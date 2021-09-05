@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[Products] (
     [Quantity]    INT            DEFAULT ((1)) NULL,
     [Cost]        FLOAT (53)     DEFAULT ((0)) NULL,
     [DateAdded]   DATETIME       DEFAULT (getdate()) NULL,
-    [ImageUrl]    NVARCHAR (50)  NULL,
+    [ImageUrl]    NVARCHAR (250)  NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

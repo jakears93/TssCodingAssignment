@@ -134,8 +134,10 @@ namespace TssCodingAssignment.Services.Data
             return product;
         }
 
-        internal Boolean AddProduct(ProductModel product)
+        internal int AddProduct(ProductModel product)
         {
+            int status = -1;
+
             //Prepare sql statement
             string sqlQuery = "INSERT INTO dbo.Products ([Name], [Description], [Type], [Quantity], [Cost], [DateAdded], [ImageUrl]) VALUES (@Name, @Desc, @Type, @Quantity, @Cost, @Date, @Img)";
 
@@ -143,24 +145,25 @@ namespace TssCodingAssignment.Services.Data
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
-                command.Parameters.Add("@Name", System.Data.SqlDbType.NVarChar).Value = product.Name;
-                command.Parameters.Add("@Desc", System.Data.SqlDbType.NVarChar).Value = product.Description;
-                command.Parameters.Add("@Type", System.Data.SqlDbType.NVarChar).Value = product.Type;
+                command.Parameters.Add("@Name", System.Data.SqlDbType.NVarChar, 50).Value = product.Name;
+                command.Parameters.Add("@Desc", System.Data.SqlDbType.NVarChar, 100).Value = product.Description;
+                command.Parameters.Add("@Type", System.Data.SqlDbType.NVarChar, 50).Value = product.Type;
                 command.Parameters.Add("@Quantity", System.Data.SqlDbType.Int).Value = product.Quantity;
                 command.Parameters.Add("@Cost", System.Data.SqlDbType.Float).Value = product.Cost;
                 command.Parameters.Add("@Date", System.Data.SqlDbType.DateTime).Value = product.DateAdded;
-                command.Parameters.Add("@Img", System.Data.SqlDbType.NVarChar).Value = product.ImageUrl;
+                command.Parameters.Add("@Img", System.Data.SqlDbType.NVarChar, 250).Value = product.ImageUrl;
                 try
                 {
                     connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    return true;
+                    status = command.ExecuteNonQuery();
+                    return status;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    return false;
                 }
+
+                return status;
             }
         }
     }

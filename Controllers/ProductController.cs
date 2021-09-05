@@ -26,7 +26,7 @@ namespace TssCodingAssignment.Controllers
             if(newProduct == null)
             {
                 product.DateAdded = DateTime.Now;
-                if(productService.AddProduct(product))
+                if (productService.AddProduct(product) == 0)
                 {
                     Console.WriteLine("Successfully Added Product");
                 }
