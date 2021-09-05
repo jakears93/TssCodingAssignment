@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TssCodingAssignment.Models.CartItemModel>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <div>Quantity</div>
+        </th>
+        <th>
+            <div>Item Name</div>
+        </th>
+        <th>
+            <div>Item Cost</div>
+        </th>
+        <th>
+            <div>Extended Cost</div>
+        </th>
+        <th></th>
+    </tr>
+
+    var totalCost = 0;
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.product.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.product.Cost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.extendedCost)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>
+
+    }
+
+</table>
+
+<h1>Total</h1>
+
