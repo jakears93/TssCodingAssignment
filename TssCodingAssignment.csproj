@@ -183,8 +183,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Modify.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Product\Product1.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Product\Catalog.cshtml" />
+    <Content Include="Views\Product\Modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

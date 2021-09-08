@@ -95,7 +95,7 @@ namespace TssCodingAssignment.Services.Data
 
         internal ProductModel GetProductByName(string name)
         {
-            ProductModel product = null;
+            ProductModel product = new ProductModel();
 
             //Prepare sql statement
             string sqlQuery = "SELECT * FROM dbo.Products WHERE Name = @Name";
@@ -152,6 +152,67 @@ namespace TssCodingAssignment.Services.Data
                 command.Parameters.Add("@Cost", System.Data.SqlDbType.Float).Value = product.Cost;
                 command.Parameters.Add("@Date", System.Data.SqlDbType.DateTime).Value = product.DateAdded;
                 command.Parameters.Add("@Img", System.Data.SqlDbType.NVarChar, 250).Value = product.ImageUrl;
+                try
+                {
+                    connection.Open();
+                    status = command.ExecuteNonQuery();
+                    return status;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return status;
+            }
+        }
+
+        internal int EditProduct(ProductModel product)
+        {
+            int status = -1;
+
+            //Prepare sql statement
+            string sqlQuery = "UPDATE dbo.Products SET Name = @Name, Description = @Desc, Type = @Type, Quantity = @Quantity, Cost = @Cost, DateAdded = @Date, ImageUrl = @Img WHERE [Id] = @Id";
+
+            //Connect to db
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@Name", System.Data.SqlDbType.NVarChar, 50).Value = product.Name;
+                command.Parameters.Add("@Desc", System.Data.SqlDbType.NVarChar, 100).Value = product.Description;
+                command.Parameters.Add("@Type", System.Data.SqlDbType.NVarChar, 50).Value = product.Type;
+                command.Parameters.Add("@Quantity", System.Data.SqlDbType.Int).Value = product.Quantity;
+                command.Parameters.Add("@Cost", System.Data.SqlDbType.Float).Value = product.Cost;
+                command.Parameters.Add("@Date", System.Data.SqlDbType.DateTime).Value = product.DateAdded;
+                command.Parameters.Add("@Img", System.Data.SqlDbType.NVarChar, 250).Value = product.ImageUrl;
+                command.Parameters.Add("@Id", System.Data.SqlDbType.Int).Value = product.Id;
+                try
+                {
+                    connection.Open();
+                    status = command.ExecuteNonQuery();
+                    return status;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return status;
+            }
+        }
+
+        internal int RemoveProduct(ProductModel product)
+        {
+            int status = -1;
+
+            //Prepare sql statement
+            string sqlQuery = "DELETE FROM dbo.Products WHERE [Id] = @Id";
+
+            //Connect to db
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@Id", System.Data.SqlDbType.Int).Value = product.Id;
                 try
                 {
                     connection.Open();

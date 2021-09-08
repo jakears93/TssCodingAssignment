@@ -25,10 +25,11 @@ namespace TssCodingAssignment.Controllers
             {
                 if (userModel.Username == "Admin")
                 {
-                    return View("Modify");
+                    Session["user"] = "Admin";
+                    return RedirectToAction("Modify", "Product");
                 }
             }
-            return RedirectToAction("Index", "Home", userModel);
+            return RedirectToAction("Index", "Home");
 
         }
 

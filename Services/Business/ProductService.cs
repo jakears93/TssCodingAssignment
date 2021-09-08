@@ -30,5 +30,15 @@ namespace TssCodingAssignment.Services.Business
         {
             return daoService.AddProduct(product);
         }
+
+        public int EditProduct(ProductModel product)
+        {
+            return daoService.EditProduct(product);
+        }
+
+        public int RemoveProduct(ProductModel product)
+        {
+            return daoService.RemoveProduct(product);
+        }
     }
 }

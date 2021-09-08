@@ -18,12 +18,12 @@ namespace TssCodingAssignment.Models
 
         public ProductModel()
         {
-            Id = -1;
+            Id = -255;
             Name = null;
             Description = null;
             Type = null;
-            Quantity = -1;
-            Cost = -1.00f;
+            Quantity = -255;
+            Cost = -255.00f;
             DateAdded = new DateTime();
             ImageUrl = null;
         }
